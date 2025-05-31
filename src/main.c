@@ -3,7 +3,7 @@
 
 #include "../include/loadfile.h"
 #include "../include/db.h"
-
+#include "../include/tui.h"
 
 
 int main(){
@@ -18,9 +18,11 @@ int main(){
 
 	int ver = PQserverVersion(conn);
 
-	
+
 	int ret;
 	if((ret = create_tables(conn)) != 0) exit(ret);
+
+	tui_main(conn);
 
 	// PGresult* res;
 

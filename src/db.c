@@ -40,16 +40,22 @@ int create_tables(PGconn* conn){
 
 
 int create_account(PGconn* conn, char* username){
+	PGresult* res;
 	
-	char* a = "INSERT INTO users (username, level, exp, gold)\n VALUES (";
+	char* a = "INSERT INTO users (username, level, exp, gold)\n VALUES ('";
 	char* b = username;
 	char* c = db_concat(a, b);
-	char* d = ", 0, 0, 0);";
+	char* d = "', 0, 0, 0);";
 	
 	char* req = db_concat(c, d);
 	free(c);
-	PQexec(conn, req);
-	free(d);
+	res = PQexec(conn, req);
+	if(PQresultStatus(res) != PGRES_COMMAND_OK){
+		fprintf(stderr, "db.c @ create_account : %s\n", PQerrorMessage(conn));
+		PQfinish(conn);
+		return 1;
+	}
+	free(req);
 
 	return 0;
 }
