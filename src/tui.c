@@ -7,6 +7,10 @@
 #define username_maxlenght 128
 
 
+void clear(){
+	printf("\033[2J\033[H");
+}
+
 int tui_register_login(void* conn){
 
 	getchar();
@@ -15,6 +19,7 @@ int tui_register_login(void* conn){
 	char input;
 
 	char* intro = loadfile("src/dialogues/register_login.txt");
+	clear();
 	printf(intro);
 	
 	while(!quit){
@@ -23,6 +28,8 @@ int tui_register_login(void* conn){
 		
 		switch(input){
 			case '1':
+				clear();
+				printf("Please enter new user's username (%d chars max): ", username_maxlenght);
 				getchar();
 				char username[username_maxlenght] = {0x00};
 				int i=0;
@@ -66,10 +73,8 @@ int tui_main(void* conn){
 
 	while(!quit){
 
-
+		clear();
 		printf(main_menu);
-		
-		
 		
 		input = getchar();
 		switch(input){

@@ -19,6 +19,7 @@ char* db_concat(char* a, char* b){
 	for(int i=0; i<lenb; i++){
 		c[lena + i] = b[i];
 	}
+	c[lenc-1] = 0x00;
 	return c;
 }
 
@@ -45,9 +46,10 @@ int create_account(PGconn* conn, char* username){
 	char* a = "INSERT INTO users (username, level, exp, gold)\n VALUES ('";
 	char* b = username;
 	char* c = db_concat(a, b);
-	char* d = "', 0, 0, 0);";
+	char* d = "', 0, 0, 0);\n";
 	
 	char* req = db_concat(c, d);
+	printf("DEBUG : %s", req);
 	free(c);
 	res = PQexec(conn, req);
 	if(PQresultStatus(res) != PGRES_COMMAND_OK){

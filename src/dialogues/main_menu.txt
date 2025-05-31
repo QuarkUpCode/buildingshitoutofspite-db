@@ -1,4 +1,4 @@
-MIAOU MIAOU MIAOU
+main_menu
 
 	(1) : Register/Login
 	(2) : Edit Account
