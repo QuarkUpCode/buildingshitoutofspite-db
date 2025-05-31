@@ -1,0 +1,10 @@
+MIAOU MIAOU MIAOU
+
+	(1) : Register/Login
+	(2) : Edit Account
+	(3) : Create Character
+	(4) : Edit Character
+	(5) : Manage Items
+	
+
+	[q] : QUIT
